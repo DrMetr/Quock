@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
+
+        h1, h2, p, button {
+            color:rgb(175, 78, 110);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: cornsilk;
+        }
+
+        h1 {
+            font-size: 40px;
+        }
+
+        img {
+            clip-path: circle(46%);
+            max-width: 50vw;
+            margin: 1rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1> Quock </h1>
+    <h2> The quacking clock </h2>
+    <p id="quock"></p>
+
+    <audio id="myAudio">
+        <source src="./quack_5.mp3" type="audio/mpeg">
+    </audio>
+
+    <img src="./duckie.jpg">
+
+    <script>
+
+        let audioEnabled = true;
+        function checkLessThanTen(arg){ //adds zero to numbers less than 10
+            if (arg < 10){
+                arg = "0" + arg;
+                };
+                return arg
+            }
+
+        function displayTime(){
+            let time = new Date();
+            let hours = time.getHours();
+            let minutes = time.getMinutes();
+            let seconds = time.getSeconds();
+            hours = checkLessThanTen(hours);
+            minutes = checkLessThanTen(minutes);
+            seconds = checkLessThanTen(seconds);
+            document.getElementById("quock").innerHTML = 
+            `It's ${hours}:${minutes}:${seconds} o'quock`;
+            goQuack();
+            setTimeout(displayTime, 1000);
+        }
+
+        function goQuack(){
+            let time = new Date();
+            let seconds = time.getSeconds();
+            if (seconds == 0){
+                let audio = document.getElementById("myAudio");
+                audio.play();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", displayTime);
+    </script>    
+</body>
+</html>
